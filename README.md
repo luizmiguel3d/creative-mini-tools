@@ -6,5 +6,5 @@ _This is a set of mini tools I made to assist on creative process using AI, they
 
 ## TOOLS:
 
- **[Chromaforge](chromaforge.html):** Create color palettes from images and export as JSON or image.
+ **[Chromaforge](https://luizmiguel3d.github.io/creative-mini-tools/chromaforge.html):** Create color palettes from images and export as JSON or image.
  ___
