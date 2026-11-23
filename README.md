@@ -2,7 +2,7 @@
 
 _This is a set of mini tools I made to assist on creative process using AI, they all work locally.
                 They are intended to solve small and specific tasks quickly, so we can focus on the creative process
-                itselft._
+                itself._
 
 ## TOOLS:
 
