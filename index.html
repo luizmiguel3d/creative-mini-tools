@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creative Mini Tools</title>
-    <!-- Carregamento do Tailwind CSS via CDN -->
+    <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fonte Inter para leitura confortável -->
+    <!-- Inter font for comfortable reading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Configuração de Cores "Meio Termo" (Confortável para os olhos) -->
+    <!-- Soft Color Configuration (Comfortable for the eyes) -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -22,7 +22,7 @@
                         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
                     },
                     colors: {
-                        // Tema Claro Suave (cinza-pedra médio-claro, sem branco puro)
+                        // Soft Light Theme (medium-light stone gray, no pure white)
                         lightBg: '#e2e5ea',
                         lightCard: '#eef0f3',
                         lightCardHover: '#f5f7f9',
@@ -30,7 +30,7 @@
                         lightText: '#1e293b',
                         lightMuted: '#526075',
 
-                        // Tema Escuro Suave (grafite médio-escuro, sem preto absoluto)
+                        // Soft Dark Theme (medium-dark graphite, no absolute black)
                         darkBg: '#22252a',
                         darkCard: '#2b2f36',
                         darkCardHover: '#323740',
@@ -38,7 +38,7 @@
                         darkText: '#e2e8f0',
                         darkMuted: '#9aa5b5',
 
-                        // Cor de destaque suave
+                        // Soft accent color
                         accent: '#38bdf8',
                         accentLight: '#0284c7',
                     }
@@ -52,21 +52,21 @@
     class="bg-lightBg text-lightText dark:bg-darkBg dark:text-darkText min-h-screen flex flex-col font-sans antialiased transition-colors duration-200 selection:bg-accent/20">
 
     <!-- ===================================================================== -->
-    <!-- CABEÇALHO COM TÍTULO GRANDE CENTRALIZADO E BOTÃO DE TEMA NO CANTO     -->
+    <!-- HEADER WITH LARGE CENTERED TITLE AND THEME TOGGLE BUTTON              -->
     <!-- ===================================================================== -->
     <header class="relative max-w-5xl w-full mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-16 sm:pb-12">
 
-        <!-- Botão Discreto de Alternância de Tema (Canto Superior Direito) -->
+        <!-- Subtle Theme Toggle Button (Top Right Corner) -->
         <div class="absolute top-5 right-4 sm:top-6 sm:right-6">
-            <button id="btn-theme-toggle" type="button" aria-label="Alternar tema" title="Alternar tema claro/escuro"
+            <button id="btn-theme-toggle" type="button" aria-label="Toggle theme" title="Toggle light/dark theme"
                 class="p-2.5 rounded-xl border border-lightBorder dark:border-darkBorder bg-lightCard dark:bg-darkCard hover:bg-lightCardHover dark:hover:bg-darkCardHover text-lightMuted dark:text-darkMuted hover:text-lightText dark:hover:text-darkText transition-colors shadow-2xs">
-                <!-- Ícone Sol (visível no tema escuro) -->
+                <!-- Sun Icon (visible in dark mode) -->
                 <svg class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
-                <!-- Ícone Lua (visível no tema claro) -->
+                <!-- Moon Icon (visible in light mode) -->
                 <svg class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -75,7 +75,7 @@
             </button>
         </div>
 
-        <!-- Título Principal Centralizado -->
+        <!-- Centered Main Title -->
         <div class="text-center max-w-xl mx-auto">
             <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-lightText dark:text-darkText">
                 Creative Mini Tools
@@ -83,42 +83,42 @@
             <p class="mt-3 text-sm sm:text-base text-lightMuted dark:text-darkMuted">
                 This is a set of mini tools I made to assist on creative process using AI, they all work locally.
                 They are intended to solve small and specific tasks quickly, so we can focus on the creative process
-                itselft.
+                itself.
             </p>
         </div>
     </header>
 
     <!-- ===================================================================== -->
-    <!-- GRID DE FERRAMENTAS                                                   -->
+    <!-- TOOLS GRID                                                            -->
     <!-- ===================================================================== -->
     <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 pb-16">
-        <section id="tools-grid" aria-label="Ferramentas disponíveis"
+        <section id="tools-grid" aria-label="Available tools"
             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <!-- Os cards serão renderizados automaticamente aqui a partir do array TOOLS -->
+            <!-- Cards will be automatically rendered here from the TOOLS array -->
         </section>
     </main>
 
     <!-- ===================================================================== -->
-    <!-- RODAPÉ MINIMALISTA                                                    -->
+    <!-- MINIMALIST FOOTER                                                     -->
     <!-- ===================================================================== -->
     <footer class="py-6 text-center text-xs text-lightMuted dark:text-darkMuted">
         <p>Creative Mini Tools</p>
     </footer>
 
     <!-- ===================================================================== -->
-    <!-- CONFIGURAÇÃO FÁCIL DAS FERRAMENTAS & LÓGICA                           -->
+    <!-- EASY TOOLS CONFIGURATION & LOGIC                                      -->
     <!-- ===================================================================== -->
     <script>
         /**
          * ====================================================================
-         * LISTA DE FERRAMENTAS (EDITE AQUI PARA ADICIONAR NOVAS)
+         * TOOLS LIST (EDIT HERE TO ADD NEW ONES)
          * ====================================================================
-         * Basta adicionar um novo objeto seguindo o modelo abaixo:
+         * Simply add a new object following the template below:
          * {
-         *     name: "Nome da Ferramenta",
-         *     description: "Descrição breve do que ela faz.",
-         *     link: "https://seu-link.com ou ./pasta/index.html",
-         *     icon: "icons/chromaforge_64.png" // Pode ser caminho de imagem ("icons/..."), emoji OU código HTML (<svg> ou <img>)
+         *     name: "Tool Name",
+         *     description: "Brief description of what it does.",
+         *     link: "https://your-link.com or ./folder/index.html",
+         *     icon: "icons/chromaforge_64.png" // Can be image path ("icons/..."), emoji OR HTML code (<svg> or <img>)
          * }
          */
         const TOOLS = [
@@ -131,7 +131,7 @@
         ];
 
         // ====================================================================
-        // GERENCIAMENTO DE TEMA (COM PERSISTÊNCIA NO LOCALSTORAGE)
+        // THEME MANAGEMENT (PERSISTED IN LOCALSTORAGE)
         // ====================================================================
         const THEME_STORAGE_KEY = 'web_tools_hub_theme';
 
@@ -153,7 +153,7 @@
         }
 
         // ====================================================================
-        // RENDERIZAÇÃO DOS CARDS
+        // CARD RENDERING
         // ====================================================================
         function escapeHTML(str) {
             return String(str)
@@ -168,7 +168,7 @@
             const grid = document.getElementById('tools-grid');
 
             grid.innerHTML = TOOLS.map(tool => {
-                // Suporta SVG inline, tag IMG inline, caminho de arquivo de imagem ou emoji/texto
+                // Supports inline SVG, inline IMG tag, image file path, or emoji/text
                 const trimmedIcon = typeof tool.icon === 'string' ? tool.icon.trim() : '';
                 const isHtml = trimmedIcon.startsWith('<svg') || trimmedIcon.startsWith('<img');
                 const isImagePath = /\.(png|jpe?g|svg|webp|gif|ico)$/i.test(trimmedIcon);
@@ -186,17 +186,17 @@
                     <a href="${escapeHTML(tool.link)}" target="_blank" rel="noopener noreferrer"
                         class="group flex flex-col p-6 rounded-2xl bg-lightCard dark:bg-darkCard border border-lightBorder dark:border-darkBorder hover:bg-lightCardHover dark:hover:bg-darkCardHover hover:border-accentLight/50 dark:hover:border-accent/50 hover:-translate-y-0.5 transition-all duration-200 shadow-2xs focus:outline-none focus:ring-2 focus:ring-accentLight dark:focus:ring-accent">
                         
-                        <!-- Ícone da Ferramenta -->
+                        <!-- Tool Icon -->
                         <div class="w-12 h-12 rounded-xl bg-lightBg dark:bg-darkBg border border-lightBorder dark:border-darkBorder flex items-center justify-center text-accentLight dark:text-accent mb-4 group-hover:scale-105 transition-transform">
                             ${iconContent}
                         </div>
 
-                        <!-- Nome (Link destacado) -->
+                        <!-- Name (Featured Link) -->
                         <h2 class="text-lg font-semibold text-lightText dark:text-darkText group-hover:text-accentLight dark:group-hover:text-accent transition-colors">
                             ${escapeHTML(tool.name)}
                         </h2>
 
-                        <!-- Descrição Breve -->
+                        <!-- Short Description -->
                         <p class="mt-2 text-sm text-lightMuted dark:text-darkMuted leading-relaxed">
                             ${escapeHTML(tool.description)}
                         </p>
@@ -206,7 +206,7 @@
         }
 
         // ====================================================================
-        // INICIALIZAÇÃO
+        // INITIALIZATION
         // ====================================================================
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();

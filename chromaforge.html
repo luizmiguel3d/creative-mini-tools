@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8" />
@@ -7,9 +7,9 @@
   <title>ChromaForge</title>
   <link rel="icon" type="image/png" sizes="128x128" href="icons/chromaforge_64.png" />
   <link rel="icon" type="image/png" sizes="64x64" href="icons/chromaforge_64.png" />
-  <!-- Tailwind CSS via CDN para estilização utilitária moderna -->
+  <!-- Tailwind CSS via CDN for modern utility styling -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Fonte Inter para legibilidade e precisão técnica -->
+  <!-- Inter font for readability and technical precision -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -38,7 +38,7 @@
     };
   </script>
   <style>
-    /* Estilização customizada mínima para sliders e scrollbars no tema escuro */
+    /* Minimal custom styling for sliders and scrollbars in dark mode */
     body {
       background-color: #09090b;
       color: #f4f4f5;
@@ -81,7 +81,7 @@
       border: 2px solid #e0e7ff;
     }
 
-    /* Scrollbar discreta */
+    /* Subtle scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -100,7 +100,7 @@
       background: #3f3f4e;
     }
 
-    /* Padrão quadriculado sutil para fundo de canvas */
+    /* Subtle checkerboard pattern for canvas background */
     .checker-bg {
       background-color: #121216;
       background-image:
@@ -117,7 +117,7 @@
 <body
   class="min-h-screen lg:h-screen lg:overflow-hidden flex flex-col selection:bg-indigo-500/30 selection:text-indigo-200">
 
-  <!-- Cabeçalho Principal -->
+  <!-- Main Header -->
   <header class="shrink-0 z-30 border-b border-zinc-800/90 bg-surface-950/95 backdrop-blur-md">
     <div class="max-w-[1600px] mx-auto px-4 sm:px-5 py-2 flex flex-wrap items-center justify-between gap-2">
       <div class="flex items-center gap-2.5">
@@ -129,20 +129,36 @@
           <div class="flex items-center gap-2">
             <h1 class="text-sm sm:text-base font-bold tracking-tight text-zinc-100">ChromaForge</h1>
           </div>
-          <p class="text-[11px] text-zinc-400 hidden xl:block">Extração determinística K-Means++ (até 256 cores) &amp;
-            edição de paletas</p>
+          <p class="text-[11px] text-zinc-400 hidden xl:block">Deterministic K-Means++ extraction (up to 256 colors) &amp; palette editing</p>
         </div>
       </div>
 
-      <!-- Ações Rápidas de Exportação no Topo -->
+      <!-- Hub informative text -->
+      <div class="text-xs text-zinc-400 text-center order-last md:order-none w-full md:w-auto">
+        <span>This tool is part from a set of mini tools, you can view all the tools <a href="index.html"
+            class="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors font-medium">here</a>.</span>
+      </div>
+
+      <!-- Quick Export Actions in Header -->
       <div class="flex flex-wrap items-center gap-2">
+        <div class="h-4 w-px bg-zinc-800 mx-0.5 hidden sm:block"></div>
+                <a href="index.html"
+          class="px-2.5 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-900 text-zinc-200 hover:text-white text-xs font-medium border border-zinc-700 flex items-center gap-1.5 transition shadow-sm"
+          title="Creative Mini Tools Hub">
+          <svg class="w-3.5 h-3.5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span class="hidden sm:inline">Mini Tools Hub</span>
+          <span class="sm:hidden">Hub</span>
+        </a>
+        <div class="h-4 w-px bg-zinc-800 mx-0.5 hidden sm:block"></div>
         <button id="btnOpenExportPng"
           class="px-2.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-xs font-medium flex items-center gap-1.5 transition shadow-md shadow-indigo-600/20">
           <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <span>Exportar PNG</span>
+          <span>Export PNG</span>
         </button>
 
         <div class="relative inline-block" id="exportDropdownWrapper">
@@ -159,10 +175,10 @@
             </svg>
           </button>
 
-          <!-- Menu suspenso de exportação -->
+          <!-- Export dropdown menu -->
           <div id="exportDropdownMenu"
             class="hidden absolute right-0 mt-2 w-64 rounded-2xl bg-surface-850 border border-zinc-700/90 shadow-2xl py-2 z-50">
-            <div class="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">Baixar Arquivo
+            <div class="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">Download File
             </div>
             <button id="btnDownloadJsonHex"
               class="w-full text-left px-3.5 py-2 text-sm text-zinc-200 hover:bg-zinc-800 flex items-center justify-between">
@@ -180,22 +196,21 @@
               <span class="text-xs text-indigo-400 font-mono">.json</span>
             </button>
             <div class="my-1.5 border-t border-zinc-800"></div>
-            <div class="px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">Copiar Área de
-              Transferência</div>
+            <div class="px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">Copy to Clipboard</div>
             <button id="btnCopyCssVars"
               class="w-full text-left px-3.5 py-2 text-sm text-zinc-200 hover:bg-zinc-800 flex items-center justify-between">
-              <span>Variáveis CSS (:root)</span>
-              <span class="text-xs text-emerald-400 font-mono">Copiar</span>
+              <span>CSS Variables (:root)</span>
+              <span class="text-xs text-emerald-400 font-mono">Copy</span>
             </button>
             <button id="btnCopyHexArray"
               class="w-full text-left px-3.5 py-2 text-sm text-zinc-200 hover:bg-zinc-800 flex items-center justify-between">
-              <span>Array HEX (JSON)</span>
-              <span class="text-xs text-emerald-400 font-mono">Copiar</span>
+              <span>HEX Array (JSON)</span>
+              <span class="text-xs text-emerald-400 font-mono">Copy</span>
             </button>
             <button id="btnCopyRgbArray"
               class="w-full text-left px-3.5 py-2 text-sm text-zinc-200 hover:bg-zinc-800 flex items-center justify-between">
-              <span>Array RGB (JSON)</span>
-              <span class="text-xs text-emerald-400 font-mono">Copiar</span>
+              <span>RGB Array (JSON)</span>
+              <span class="text-xs text-emerald-400 font-mono">Copy</span>
             </button>
           </div>
         </div>
@@ -203,48 +218,48 @@
     </div>
   </header>
 
-  <!-- Conteúdo Principal Responsivo -->
+  <!-- Responsive Main Content -->
   <main
     class="flex-1 min-h-0 max-w-[1600px] w-full mx-auto px-4 sm:px-5 py-3 grid grid-cols-1 lg:grid-cols-12 gap-4 overflow-y-auto lg:overflow-hidden">
 
-    <!-- COLUNA ESQUERDA: Imagem & Controles de Extração (5 colunas no desktop) -->
+    <!-- LEFT COLUMN: Image & Extraction Controls (5 columns on desktop) -->
     <section class="lg:col-span-5 flex flex-col gap-3 min-h-0">
 
-      <!-- Card de Carregamento e Visualização de Imagem -->
+      <!-- Image Loading and Preview Card -->
       <div
         class="rounded-2xl bg-surface-900 border border-zinc-800/90 p-3 flex flex-col gap-2.5 shadow-xl flex-1 min-h-0">
         <div class="flex flex-wrap items-center justify-between gap-2 shrink-0">
           <div class="flex items-center gap-2">
-            <h2 class="text-xs sm:text-sm font-semibold text-zinc-100">Imagem de Origem</h2>
+            <h2 class="text-xs sm:text-sm font-semibold text-zinc-100">Source Image</h2>
             <span id="imageDimensionsBadge"
               class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-400">640×420</span>
           </div>
 
           <div class="flex items-center gap-1.5">
-            <!-- Botão Conta-Gotas -->
-            <button id="btnEyedropper" title="Ativar Conta-Gotas para amostrar cor diretamente da imagem"
+            <!-- Eyedropper Button -->
+            <button id="btnEyedropper" title="Activate Eyedropper to sample color directly from image"
               class="px-2 py-1 rounded-xl text-[11px] font-medium border border-zinc-700 bg-zinc-800/90 text-zinc-300 hover:bg-zinc-700 flex items-center gap-1 transition">
               <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
               </svg>
-              <span>Conta-Gotas</span>
+              <span>Eyedropper</span>
             </button>
 
-            <!-- Botão Carregar Imagem -->
+            <!-- Load Image Button -->
             <label for="fileInput"
               class="cursor-pointer px-2.5 py-1 rounded-xl text-[11px] font-medium bg-zinc-100 hover:bg-white text-zinc-900 flex items-center gap-1 transition shadow-sm">
               <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
               </svg>
-              <span>Carregar</span>
+              <span>Load Image</span>
             </label>
             <input id="fileInput" type="file" accept="image/*" class="hidden" />
           </div>
         </div>
 
-        <!-- Barra de Modo de Visualização (Original vs Quantizada) -->
+        <!-- View Mode Bar (Original vs Quantized) -->
         <div
           class="flex items-center justify-between gap-2 bg-surface-950 p-1 rounded-xl border border-zinc-800/80 shrink-0">
           <div class="flex items-center gap-1">
@@ -252,20 +267,20 @@
               class="px-2.5 py-1 rounded-lg text-[11px] font-medium bg-zinc-800 text-white transition">Original</button>
             <button id="btnViewQuantized"
               class="px-2.5 py-1 rounded-lg text-[11px] font-medium text-zinc-400 hover:text-zinc-200 transition flex items-center gap-1.5">
-              <span>Preview Quantizado</span>
+              <span>Quantized Preview</span>
               <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
             </button>
           </div>
-          <span class="text-[10px] text-zinc-500 pr-2 hidden sm:inline">Arraste ou Ctrl+V</span>
+          <span class="text-[10px] text-zinc-500 pr-2 hidden sm:inline">Drag & drop or Ctrl+V</span>
         </div>
 
-        <!-- Área Interativa da Imagem (Dropzone + Canvas + Lupa Conta-Gotas) -->
+        <!-- Interactive Image Area (Dropzone + Canvas + Eyedropper Magnifier) -->
         <div id="dropZone"
           class="relative w-full flex-1 min-h-[140px] rounded-xl overflow-hidden border-2 border-dashed border-zinc-800 hover:border-zinc-700 checker-bg flex items-center justify-center group transition">
           <canvas id="previewCanvas"
             class="max-w-full max-h-full w-auto h-auto object-contain block select-none"></canvas>
 
-          <!-- Overlay Drag & Drop -->
+          <!-- Drag & Drop Overlay -->
           <div id="dragOverlay"
             class="hidden absolute inset-0 bg-indigo-950/85 backdrop-blur-sm border-2 border-indigo-400 rounded-xl flex flex-col items-center justify-center p-4 text-center z-20 pointer-events-none">
             <svg class="w-10 h-10 text-indigo-300 mb-2 animate-bounce" fill="none" viewBox="0 0 24 24"
@@ -273,34 +288,34 @@
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
-            <p class="text-sm font-semibold text-white">Solte a imagem aqui para extrair as cores</p>
-            <p class="text-xs text-indigo-200 mt-1">PNG, JPG, WEBP, GIF ou SVG</p>
+            <p class="text-sm font-semibold text-white">Drop image here to extract colors</p>
+            <p class="text-xs text-indigo-200 mt-1">PNG, JPG, WEBP, GIF, or SVG</p>
           </div>
 
-          <!-- Tooltip Flutuante do Conta-Gotas -->
+          <!-- Floating Eyedropper Tooltip -->
           <div id="eyedropperTooltip"
             class="hidden pointer-events-none absolute z-20 px-2.5 py-1.5 rounded-xl bg-zinc-950/95 border border-zinc-700 shadow-xl flex items-center gap-2 text-xs font-mono">
             <span id="eyedropperSwatch" class="w-4 h-4 rounded-md border border-white/30"></span>
             <span id="eyedropperHex" class="text-zinc-100 font-semibold">#000000</span>
           </div>
 
-          <!-- Banner de Instrução quando Conta-Gotas ativo -->
+          <!-- Instruction Banner when Eyedropper is active -->
           <div id="eyedropperBanner"
             class="hidden absolute bottom-2.5 left-2.5 right-2.5 px-3 py-2 rounded-xl bg-indigo-600/95 text-white text-xs font-medium flex items-center justify-between shadow-lg backdrop-blur-sm">
-            <span id="eyedropperBannerText">Clique na imagem para amostrar uma cor</span>
+            <span id="eyedropperBannerText">Click on image to sample a color</span>
             <button id="btnCancelEyedropper"
-              class="px-2 py-0.5 rounded-lg bg-black/25 hover:bg-black/40 text-[11px]">Sair (ESC)</button>
+              class="px-2 py-0.5 rounded-lg bg-black/25 hover:bg-black/40 text-[11px]">Exit (ESC)</button>
           </div>
         </div>
       </div>
 
-      <!-- Card de Parâmetros do Algoritmo K-Means++ -->
+      <!-- K-Means++ Algorithm Parameters Card -->
       <div class="rounded-2xl bg-surface-900 border border-zinc-800/90 p-3 flex flex-col gap-2.5 shadow-xl shrink-0">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <h2 class="text-xs sm:text-sm font-semibold text-zinc-100">Parâmetros de Extração</h2>
+            <h2 class="text-xs sm:text-sm font-semibold text-zinc-100">Extraction Parameters</h2>
             <span id="processingBadge"
-              class="hidden text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">Calculando...</span>
+              class="hidden text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">Calculating...</span>
           </div>
           <button id="btnRegenerate"
             class="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-[11px] font-medium text-zinc-200 border border-zinc-700 flex items-center gap-1 transition">
@@ -308,15 +323,14 @@
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
-            <span>Re-gerar</span>
+            <span>Regenerate</span>
           </button>
         </div>
 
-        <!-- Controle: Número de Cores (2 a 256) -->
+        <!-- Control: Color Count (2 to 256) -->
         <div class="flex flex-col gap-1.5 bg-surface-950/70 p-2.5 rounded-xl border border-zinc-800/80">
           <div class="flex items-center justify-between">
-            <label for="colorCountSlider" class="text-[11px] font-medium text-zinc-300">Quantidade de Cores (2 –
-              256)</label>
+            <label for="colorCountSlider" class="text-[11px] font-medium text-zinc-300">Color Count (2 – 256)</label>
             <input id="colorCountInput" type="number" min="2" max="256" value="12"
               class="w-16 px-2 py-0.5 rounded-lg bg-zinc-900 border border-zinc-700 text-right font-mono text-xs text-zinc-100 focus:outline-none focus:border-indigo-500" />
           </div>
@@ -338,89 +352,89 @@
           </div>
         </div>
 
-        <!-- Controle: Seed Determinística -->
+        <!-- Control: Deterministic Seed -->
         <div class="flex flex-col gap-1.5 bg-surface-950/70 p-2.5 rounded-xl border border-zinc-800/80">
           <div class="flex items-center justify-between gap-2">
-            <label for="seedSlider" class="text-[11px] font-medium text-zinc-300">Seed de Captura (Variação)</label>
+            <label for="seedSlider" class="text-[11px] font-medium text-zinc-300">Capture Seed (Variation)</label>
             <div class="flex items-center gap-1.5">
               <input id="seedInput" type="number" min="1" max="9999" value="42"
                 class="w-16 px-2 py-0.5 rounded-lg bg-zinc-900 border border-zinc-700 text-right font-mono text-xs text-zinc-100 focus:outline-none focus:border-indigo-500" />
-              <button id="btnRandomSeed" title="Gerar Seed Aleatória"
+              <button id="btnRandomSeed" title="Generate Random Seed"
                 class="px-2 py-0.5 rounded-lg bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 border border-indigo-500/30 text-[11px] font-medium transition">
-                Aleatório
+                Random
               </button>
             </div>
           </div>
           <input id="seedSlider" type="range" min="1" max="9999" value="42" class="w-full" />
         </div>
 
-        <!-- Ordenação da Paleta -->
+        <!-- Palette Sorting -->
         <div class="flex items-center justify-between gap-3">
-          <label for="sortSelect" class="text-[11px] font-medium text-zinc-300 shrink-0">Ordenar Por</label>
+          <label for="sortSelect" class="text-[11px] font-medium text-zinc-300 shrink-0">Sort By</label>
           <select id="sortSelect"
             class="w-full px-2.5 py-1.5 rounded-xl bg-surface-950 border border-zinc-800 text-xs text-zinc-200 focus:outline-none focus:border-indigo-500">
-            <option value="dominance">Dominância (% na imagem)</option>
-            <option value="hue">Matiz (Espectro Cromático / Hue)</option>
-            <option value="luminance">Luminosidade (Escuro → Claro)</option>
-            <option value="original">Ordem Original do Cluster</option>
+            <option value="dominance">Dominance (% in image)</option>
+            <option value="hue">Hue (Color Spectrum / Hue)</option>
+            <option value="luminance">Luminance (Dark → Light)</option>
+            <option value="original">Original Cluster Order</option>
           </select>
         </div>
       </div>
     </section>
 
-    <!-- COLUNA DIREITA: Grade de Paleta & Editor Manual (7 colunas no desktop) -->
+    <!-- RIGHT COLUMN: Palette Grid & Manual Editor (7 columns on desktop) -->
     <section class="lg:col-span-7 flex flex-col min-h-0">
 
-      <!-- Barra de Status e Ações da Paleta -->
+      <!-- Palette Status Bar and Actions -->
       <div
         class="rounded-2xl bg-surface-900 border border-zinc-800/90 p-3.5 flex flex-col gap-3 shadow-xl flex-1 min-h-0">
         <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-zinc-800/90 shrink-0">
           <div class="flex flex-wrap items-center gap-2">
-            <h2 class="text-sm font-semibold text-zinc-100">Paleta Extraída</h2>
+            <h2 class="text-sm font-semibold text-zinc-100">Extracted Palette</h2>
             <span id="paletteCountBadge"
               class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-200 border border-zinc-700">12
-              cores</span>
+              colors</span>
             <span id="manualEditBadge"
               class="hidden text-[11px] font-medium px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1">
               <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-              <span id="manualEditCountText">1 edição manual</span>
+              <span id="manualEditCountText">1 manual edit</span>
             </span>
           </div>
 
           <div class="flex flex-wrap items-center gap-2">
-            <!-- Adicionar Nova Cor Manualmente -->
+            <!-- Add New Color Manually -->
             <button id="btnAddColor"
               class="px-2.5 py-1 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-[11px] font-medium flex items-center gap-1 transition">
               <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
               </svg>
-              <span>Adicionar Cor</span>
+              <span>Add Color</span>
             </button>
           </div>
         </div>
 
-        <!-- Barra de Proporção Visual (Spectrum Bar) -->
+        <!-- Proportional Visual Bar (Spectrum Bar) -->
         <div class="flex flex-col gap-1 shrink-0">
           <div class="flex items-center justify-between text-[10px] text-zinc-400">
-            <span>Distribuição Proporcional</span>
-            <span id="executionTimeLabel" class="font-mono text-zinc-500">Pronto</span>
+            <span>Proportional Distribution</span>
+            <span id="executionTimeLabel" class="font-mono text-zinc-500">Ready</span>
           </div>
           <div id="spectrumBar"
             class="w-full h-3 rounded-lg overflow-hidden flex bg-surface-950 border border-zinc-800 shadow-inner">
-            <!-- Segmentos gerados dinamicamente -->
+            <!-- Dynamically generated segments -->
           </div>
         </div>
 
-        <!-- Grade de Cores Adaptativa (Sem Scroll: escala automaticamente até 256 cores) -->
+        <!-- Adaptive Color Grid (No Scroll: automatically scales up to 256 colors) -->
         <div id="paletteGrid" class="flex-1 min-h-0 grid gap-1.5 overflow-hidden">
-          <!-- Cards das cores gerados via JS -->
+          <!-- Color cards generated via JS -->
         </div>
       </div>
     </section>
   </main>
 
   <!-- ===================================================================== -->
-  <!-- MODAL 1: EDITOR MANUAL DE COR INDIVIDUAL                              -->
+  <!-- MODAL 1: INDIVIDUAL COLOR MANUAL EDITOR                              -->
   <!-- ===================================================================== -->
   <div id="colorEditorModal"
     class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
@@ -429,7 +443,7 @@
       <div class="px-5 py-4 border-b border-zinc-800 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <span id="modalColorPreviewDot" class="w-5 h-5 rounded-lg border border-white/20 shadow"></span>
-          <h3 class="text-sm font-semibold text-zinc-100">Editar Cor #<span id="modalColorIndex">1</span></h3>
+          <h3 class="text-sm font-semibold text-zinc-100">Edit Color #<span id="modalColorIndex">1</span></h3>
         </div>
         <button id="btnCloseColorEditor"
           class="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition">
@@ -440,7 +454,7 @@
       </div>
 
       <div class="p-5 flex flex-col gap-4">
-        <!-- Seletor Nativo + Botão Amostrar da Imagem -->
+        <!-- Native Picker + Sample from Image Button -->
         <div class="flex items-center gap-3">
           <div class="relative flex-1 h-16 rounded-xl overflow-hidden border border-zinc-700 shadow-inner">
             <input id="modalNativeColorPicker" type="color"
@@ -452,18 +466,18 @@
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
             </svg>
-            <span>Pegar da Imagem</span>
+            <span>Pick from Image</span>
           </button>
         </div>
 
-        <!-- Input HEX -->
+        <!-- HEX Input -->
         <div class="flex flex-col gap-1">
-          <label class="text-xs font-medium text-zinc-400">Código Hexadecimal (HEX)</label>
+          <label class="text-xs font-medium text-zinc-400">Hexadecimal Code (HEX)</label>
           <input id="modalHexInput" type="text" maxlength="7" placeholder="#RRGGBB"
             class="w-full px-3 py-2 rounded-xl bg-surface-950 border border-zinc-700 font-mono text-sm text-zinc-100 uppercase focus:outline-none focus:border-indigo-500" />
         </div>
 
-        <!-- Inputs RGB -->
+        <!-- RGB Inputs -->
         <div class="grid grid-cols-3 gap-2.5">
           <div class="flex flex-col gap-1">
             <label class="text-xs font-medium text-rose-400">R (0–255)</label>
@@ -482,10 +496,10 @@
           </div>
         </div>
 
-        <!-- Inputs HSL -->
+        <!-- HSL Inputs -->
         <div class="grid grid-cols-3 gap-2.5">
           <div class="flex flex-col gap-1">
-            <label class="text-xs font-medium text-zinc-400">Matiz H (0–360°)</label>
+            <label class="text-xs font-medium text-zinc-400">Hue H (0–360°)</label>
             <input id="modalHInput" type="number" min="0" max="360"
               class="w-full px-3 py-2 rounded-xl bg-surface-950 border border-zinc-700 font-mono text-sm text-zinc-100 focus:outline-none focus:border-indigo-500" />
           </div>
@@ -495,26 +509,26 @@
               class="w-full px-3 py-2 rounded-xl bg-surface-950 border border-zinc-700 font-mono text-sm text-zinc-100 focus:outline-none focus:border-indigo-500" />
           </div>
           <div class="flex flex-col gap-1">
-            <label class="text-xs font-medium text-zinc-400">Lum. L (0–100%)</label>
+            <label class="text-xs font-medium text-zinc-400">Lightness L (0–100%)</label>
             <input id="modalLInput" type="number" min="0" max="100"
               class="w-full px-3 py-2 rounded-xl bg-surface-950 border border-zinc-700 font-mono text-sm text-zinc-100 focus:outline-none focus:border-indigo-500" />
           </div>
         </div>
 
-        <!-- Ações do Modal de Cor -->
+        <!-- Color Modal Actions -->
         <div class="flex items-center justify-between pt-2 border-t border-zinc-800 gap-2">
           <div class="flex items-center gap-1.5">
             <button id="btnDuplicateColor" type="button"
-              class="px-2.5 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium transition">Duplicar</button>
+              class="px-2.5 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium transition">Duplicate</button>
             <button id="btnDeleteColor" type="button"
-              class="px-2.5 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 text-xs font-medium transition">Remover</button>
+              class="px-2.5 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 text-xs font-medium transition">Remove</button>
           </div>
           <div class="flex items-center gap-2">
             <button id="btnCancelColorEditor" type="button"
-              class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-medium transition">Cancelar</button>
+              class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-medium transition">Cancel</button>
             <button id="btnSaveColorEditor" type="button"
-              class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition">Aplicar
-              Cor</button>
+              class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition">Apply
+              Color</button>
           </div>
         </div>
       </div>
@@ -522,7 +536,7 @@
   </div>
 
   <!-- ===================================================================== -->
-  <!-- MODAL 2: CONFIRMAÇÃO DE PERDA DE EDIÇÕES MANUAIS (OBRIGATÓRIO)        -->
+  <!-- MODAL 2: CONFIRMATION TO DISCARD MANUAL EDITS (REQUIRED)          -->
   <!-- ===================================================================== -->
   <div id="confirmResetModal"
     class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
@@ -537,10 +551,10 @@
             </svg>
           </div>
           <div>
-            <h3 class="text-base font-semibold text-zinc-100">Descartar edições manuais?</h3>
+            <h3 class="text-base font-semibold text-zinc-100">Discard manual edits?</h3>
             <p class="text-xs sm:text-sm text-zinc-300 mt-1 leading-relaxed">
-              Você realizou alterações manuais na paleta atual. Re-gerar a paleta com novos parâmetros substituirá todas
-              as cores personalizadas.
+              You have made manual changes to the current palette. Regenerating the palette with new parameters will overwrite all
+              customized colors.
             </p>
           </div>
         </div>
@@ -548,11 +562,11 @@
         <div class="flex items-center justify-end gap-2.5 pt-2 border-t border-zinc-800">
           <button id="btnCancelRegen"
             class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs sm:text-sm font-medium transition">
-            Cancelar
+            Cancel
           </button>
           <button id="btnConfirmRegen"
             class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs sm:text-sm font-semibold transition shadow-lg shadow-amber-500/20">
-            Confirmar e Re-gerar
+            Confirm and Regenerate
           </button>
         </div>
       </div>
@@ -560,14 +574,14 @@
   </div>
 
   <!-- ===================================================================== -->
-  <!-- MODAL 3: EXPORTAÇÃO DE IMAGEM PNG (GRADE CUSTOMIZÁVEL)                -->
+  <!-- MODAL 3: PNG IMAGE EXPORT (CUSTOMIZABLE GRID)                      -->
   <!-- ===================================================================== -->
   <div id="exportPngModal"
     class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div
       class="w-full max-w-2xl rounded-2xl bg-surface-900 border border-zinc-700/90 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
       <div class="px-5 py-4 border-b border-zinc-800 flex items-center justify-between">
-        <h3 class="text-sm sm:text-base font-semibold text-zinc-100">Exportar Paleta como Imagem PNG</h3>
+        <h3 class="text-sm sm:text-base font-semibold text-zinc-100">Export Palette as PNG Image</h3>
         <button id="btnCloseExportPng"
           class="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -577,32 +591,32 @@
       </div>
 
       <div class="p-5 overflow-y-auto flex flex-col gap-4">
-        <!-- Controles de Layout da Grade PNG -->
+        <!-- PNG Grid Layout Controls -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-surface-950 p-3.5 rounded-xl border border-zinc-800">
           <div class="flex flex-col gap-1">
-            <label for="pngColumnsInput" class="text-xs font-medium text-zinc-400">Colunas na Grade</label>
+            <label for="pngColumnsInput" class="text-xs font-medium text-zinc-400">Grid Columns</label>
             <input id="pngColumnsInput" type="number" min="1" max="32" value="6"
               class="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs font-mono text-zinc-100" />
           </div>
 
           <div class="flex flex-col gap-1">
-            <label for="pngLabelModeSelect" class="text-xs font-medium text-zinc-400">Rótulos nas Células</label>
+            <label for="pngLabelModeSelect" class="text-xs font-medium text-zinc-400">Cell Labels</label>
             <select id="pngLabelModeSelect"
               class="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs text-zinc-100">
-              <option value="hex">Código HEX (#RRGGBB)</option>
+              <option value="hex">HEX Code (#RRGGBB)</option>
               <option value="hex_rgb">HEX + RGB</option>
-              <option value="none">Sem texto (apenas cores)</option>
+              <option value="none">No text (colors only)</option>
             </select>
           </div>
 
           <div class="flex flex-col gap-1">
-            <label for="pngGapInput" class="text-xs font-medium text-zinc-400">Espaçamento (px)</label>
+            <label for="pngGapInput" class="text-xs font-medium text-zinc-400">Spacing (px)</label>
             <input id="pngGapInput" type="number" min="0" max="40" value="12"
               class="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs font-mono text-zinc-100" />
           </div>
         </div>
 
-        <!-- Preview da Imagem PNG Gerada -->
+        <!-- Preview of Generated PNG Image -->
         <div
           class="rounded-xl border border-zinc-800 checker-bg p-3 flex items-center justify-center max-h-[380px] overflow-auto">
           <canvas id="exportPngPreviewCanvas" class="max-w-full h-auto rounded-lg shadow-lg"></canvas>
@@ -611,58 +625,58 @@
 
       <div class="px-5 py-3.5 border-t border-zinc-800 flex items-center justify-end gap-2.5 bg-surface-950/60">
         <button id="btnCancelExportPng"
-          class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs sm:text-sm font-medium transition">Fechar</button>
+          class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs sm:text-sm font-medium transition">Close</button>
         <button id="btnDownloadPngNow"
           class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition shadow-lg shadow-indigo-600/20">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
-          <span>Baixar PNG</span>
+          <span>Download PNG</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Toast de Notificação -->
+  <!-- Notification Toast -->
   <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
   <!-- ===================================================================== -->
-  <!-- LÓGICA DA APLICAÇÃO (OFFLINE-FIRST, K-MEANS++ SEEDED & UI)            -->
+  <!-- APPLICATION LOGIC (OFFLINE-FIRST, K-MEANS++ SEEDED & UI)            -->
   <!-- ===================================================================== -->
   <script>
     (() => {
       'use strict';
 
       /* =====================================================================
-         1. ESTADO GLOBAL DA APLICAÇÃO
+         1. GLOBAL APPLICATION STATE
          ===================================================================== */
       const state = {
-        // Parâmetros ativos confirmados
+        // Active confirmed parameters
         colorCount: 12,
         seed: 42,
         sortBy: 'dominance', // 'dominance' | 'hue' | 'luminance' | 'original'
         viewMode: 'original', // 'original' | 'quantized'
 
-        // Controle de edições manuais
+        // Manual edits tracking
         hasManualEdits: false,
         palette: [], // Array<{ id, r, g, b, ratio, edited, originalIndex }>
 
-        // Dados da imagem carregada
+        // Loaded image data
         sourceImageCanvas: document.createElement('canvas'),
-        sampledPixels: null, // Uint8ClampedArray (RGBA) downsampled para K-Means rápido
+        sampledPixels: null, // Uint8ClampedArray (RGBA) downsampled for fast K-Means
 
-        // Estado de edição individual / conta-gotas
+        // Individual editing / eyedropper state
         editingColorId: null,
         eyedropperActive: false,
-        eyedropperTargetId: null, // Se null, copia/adiciona; se definido, substitui cor em edição
+        eyedropperTargetId: null, // If null, copy/add; if defined, replaces color being edited
 
-        // Ação pendente aguardando confirmação do usuário
+        // Pending action awaiting user confirmation
         pendingAction: null // { type: 'seed'|'count'|'regenerate'|'preset', newValue, revertFn }
       };
 
       /* =====================================================================
-         2. REFERÊNCIAS DO DOM
+         2. DOM REFERENCES
          ===================================================================== */
       const dom = {
         fileInput: document.getElementById('fileInput'),
@@ -699,7 +713,7 @@
         executionTimeLabel: document.getElementById('executionTimeLabel'),
         paletteGrid: document.getElementById('paletteGrid'),
 
-        // Modal Editor de Cor
+        // Color Editor Modal
         colorEditorModal: document.getElementById('colorEditorModal'),
         modalColorPreviewDot: document.getElementById('modalColorPreviewDot'),
         modalColorIndex: document.getElementById('modalColorIndex'),
@@ -718,12 +732,12 @@
         btnCancelColorEditor: document.getElementById('btnCancelColorEditor'),
         btnSaveColorEditor: document.getElementById('btnSaveColorEditor'),
 
-        // Modal Confirmação
+        // Confirmation Modal
         confirmResetModal: document.getElementById('confirmResetModal'),
         btnCancelRegen: document.getElementById('btnCancelRegen'),
         btnConfirmRegen: document.getElementById('btnConfirmRegen'),
 
-        // Exportação & Menus
+        // Export & Menus
         btnOpenExportPng: document.getElementById('btnOpenExportPng'),
         exportPngModal: document.getElementById('exportPngModal'),
         btnCloseExportPng: document.getElementById('btnCloseExportPng'),
@@ -748,7 +762,7 @@
       };
 
       /* =====================================================================
-         3. UTILITÁRIOS DE COR, PRNG (MULBERRY32), CLIPBOARD E TOAST
+         3. COLOR UTILITIES, PRNG (MULBERRY32), CLIPBOARD AND TOAST
          ===================================================================== */
       function createMulberry32(seed) {
         let a = seed >>> 0;
@@ -869,7 +883,7 @@
         }, 2600);
       }
 
-      function copyTextToClipboard(text, successMsg = 'Copiado para a área de transferência!') {
+      function copyTextToClipboard(text, successMsg = 'Copied to clipboard!') {
         const textarea = document.createElement('textarea');
         textarea.value = text;
         textarea.style.position = 'fixed';
@@ -880,13 +894,13 @@
           document.execCommand('copy');
           showToast(successMsg);
         } catch (err) {
-          showToast('Não foi possível copiar automaticamente.', 'error');
+          showToast('Could not copy automatically.', 'error');
         }
         document.body.removeChild(textarea);
       }
 
       /* =====================================================================
-         4. GERAÇÃO DA IMAGEM INICIAL PADRÃO (100% OFFLINE VIA CANVAS)
+         4. DEFAULT INITIAL IMAGE GENERATION (100% OFFLINE VIA CANVAS)
          ===================================================================== */
       function loadDefaultInitialImage() {
         const w = 640, h = 420;
@@ -894,7 +908,7 @@
         state.sourceImageCanvas.height = h;
         const ctx = state.sourceImageCanvas.getContext('2d');
 
-        // Céu crepuscular vibrante com transição rica de cores
+        // Vibrant twilight sky with rich color transition
         const bg = ctx.createLinearGradient(0, 0, 0, h);
         bg.addColorStop(0, '#090418');
         bg.addColorStop(0.45, '#2b1055');
@@ -903,7 +917,7 @@
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, w, h);
 
-        // Sol estilizado
+        // Stylized sun
         const sun = ctx.createLinearGradient(0, h * 0.25, 0, h * 0.72);
         sun.addColorStop(0, '#fff59d');
         sun.addColorStop(0.5, '#ffca28');
@@ -913,7 +927,7 @@
         ctx.arc(w * 0.5, h * 0.54, Math.min(w, h) * 0.26, 0, Math.PI * 2);
         ctx.fill();
 
-        // Montanhas geométricas em camadas
+        // Layered geometric mountains
         ctx.fillStyle = '#120826';
         ctx.beginPath();
         ctx.moveTo(0, h * 0.72);
@@ -926,7 +940,7 @@
         ctx.closePath();
         ctx.fill();
 
-        // Grade ciano inferior
+        // Bottom cyan grid
         ctx.strokeStyle = '#00e5ff';
         ctx.lineWidth = 1.5;
         for (let y = h * 0.74; y < h; y += 16) {
@@ -940,11 +954,11 @@
       }
 
       /* =====================================================================
-         5. CARREGAMENTO DE IMAGEM (ARQUIVO, DRAG & DROP, PASTE)
+         5. IMAGE LOADING (FILE, DRAG & DROP, PASTE)
          ===================================================================== */
       function handleImageFile(file) {
         if (!file || !file.type.startsWith('image/')) {
-          showToast('Por favor, selecione um arquivo de imagem válido.', 'error');
+          showToast('Please select a valid image file.', 'error');
           return;
         }
         const reader = new FileReader();
@@ -956,9 +970,9 @@
             const ctx = state.sourceImageCanvas.getContext('2d');
             ctx.drawImage(img, 0, 0);
             onNewImageLoaded(img.naturalWidth, img.naturalHeight);
-            showToast(`Imagem carregada (${img.naturalWidth}×${img.naturalHeight})`);
+            showToast(`Image loaded (${img.naturalWidth}×${img.naturalHeight})`);
           };
-          img.onerror = () => showToast('Falha ao decodificar a imagem.', 'error');
+          img.onerror = () => showToast('Failed to decode image.', 'error');
           img.src = e.target.result;
         };
         reader.readAsDataURL(file);
@@ -967,7 +981,7 @@
       function onNewImageLoaded(width, height) {
         dom.imageDimensionsBadge.textContent = `${width}×${height}`;
 
-        // Downsampling inteligente em canvas oculto para manter o K-Means++ veloz até 256 cores
+        // Intelligent downsampling on hidden canvas to keep K-Means++ fast up to 256 colors
         const MAX_SAMPLE_DIM = 180;
         const scale = Math.min(1, MAX_SAMPLE_DIM / Math.max(width, height));
         const sw = Math.max(1, Math.round(width * scale));
@@ -982,27 +996,27 @@
         const imgData = sCtx.getImageData(0, 0, sw, sh).data;
         const pixels = [];
         for (let i = 0; i < imgData.length; i += 4) {
-          // Ignorar pixels quase totalmente transparentes
+          // Ignore nearly transparent pixels
           if (imgData[i + 3] >= 128) {
             pixels.push([imgData[i], imgData[i + 1], imgData[i + 2]]);
           }
         }
         state.sampledPixels = pixels.length > 0 ? pixels : [[0, 0, 0]];
 
-        // Nova imagem reseta flag de edições manuais e gera paleta
+        // New image resets manual edits flag and generates palette
         state.hasManualEdits = false;
         runExtraction();
       }
 
       /* =====================================================================
-         6. ALGORITMO K-MEANS++ DETERMINÍSTICO (SEEDED)
+         6. DETERMINISTIC K-MEANS++ ALGORITHM (SEEDED)
          ===================================================================== */
       function extractPaletteKMeansPlusPlus(pixels, k, seed) {
         const rng = createMulberry32(seed);
         const n = pixels.length;
         const targetK = Math.min(Math.max(2, k), 256);
 
-        // 1. Inicialização K-Means++ determinística com a Seed
+        // 1. Deterministic K-Means++ initialization with Seed
         const centroids = [];
         const firstIdx = Math.floor(rng() * n);
         centroids.push([...pixels[firstIdx]]);
@@ -1026,7 +1040,7 @@
           }
 
           if (totalDistSq === 0) {
-            // Todos os pixels restantes têm distância zero; escolhe determinístico
+            // All remaining pixels have zero distance; choose deterministic
             const fallbackIdx = Math.floor(rng() * n);
             centroids.push([...pixels[fallbackIdx]]);
           } else {
@@ -1043,7 +1057,7 @@
           }
         }
 
-        // 2. Iterações de refinamento Lloyd (ajustado dinamicamente conforme K)
+        // 2. Lloyd refinement iterations (dynamically adjusted according to K)
         const maxIterations = targetK > 128 ? 10 : targetK > 48 ? 14 : 18;
         const assignments = new Int32Array(n);
         const counts = new Int32Array(targetK);
@@ -1083,14 +1097,14 @@
             counts[bestCluster]++;
           }
 
-          // Atualiza centróides
+          // Update centroids
           for (let c = 0; c < targetK; c++) {
             if (counts[c] > 0) {
               centroids[c][0] = sumR[c] / counts[c];
               centroids[c][1] = sumG[c] / counts[c];
               centroids[c][2] = sumB[c] / counts[c];
             } else {
-              // Cluster vazio recebe um pixel determinístico para não desperdiçar cor
+              // Empty cluster receives a deterministic pixel so as not to waste color
               const reseedIdx = Math.floor(rng() * n);
               centroids[c] = [...pixels[reseedIdx]];
             }
@@ -1099,7 +1113,7 @@
           if (!changed && iter > 2) break;
         }
 
-        // 3. Monta objetos de resultado com proporção de dominância
+        // 3. Assemble result objects with dominance ratio
         const results = centroids.map((c, idx) => ({
           id: `clr_${Date.now()}_${idx}_${Math.floor(rng() * 10000)}`,
           r: clampByte(c[0]),
@@ -1117,7 +1131,7 @@
         if (!state.sampledPixels) return;
         dom.processingBadge.classList.remove('hidden');
 
-        // Usa setTimeout mínimo para permitir repaint do badge em 256 cores
+        // Uses minimal setTimeout to allow badge repaint with 256 colors
         setTimeout(() => {
           const t0 = performance.now();
           const rawPalette = extractPaletteKMeansPlusPlus(state.sampledPixels, state.colorCount, state.seed);
@@ -1135,7 +1149,7 @@
       }
 
       /* =====================================================================
-         7. ORDENAÇÃO E RENDERIZAÇÃO DA PALETA E DO CANVAS
+         7. PALETTE AND CANVAS SORTING AND RENDERING
          ===================================================================== */
       function getSortedPalette() {
         const list = [...state.palette];
@@ -1160,19 +1174,19 @@
       function renderPalette() {
         const sorted = getSortedPalette();
 
-        // Atualiza contadores e indicador de edições manuais
-        dom.paletteCountBadge.textContent = `${sorted.length} ${sorted.length === 1 ? 'cor' : 'cores'}`;
+        // Update counters and manual edits indicator
+        dom.paletteCountBadge.textContent = `${sorted.length} ${sorted.length === 1 ? 'color' : 'colors'}`;
         const editedCount = state.palette.filter((c) => c.edited).length;
         state.hasManualEdits = editedCount > 0;
 
         if (editedCount > 0) {
           dom.manualEditBadge.classList.remove('hidden');
-          dom.manualEditCountText.textContent = `${editedCount} ${editedCount === 1 ? 'edição manual' : 'edições manuais'}`;
+          dom.manualEditCountText.textContent = `${editedCount} ${editedCount === 1 ? 'manual edit' : 'manual edits'}`;
         } else {
           dom.manualEditBadge.classList.add('hidden');
         }
 
-        // Atualiza barra de espectro proporcional
+        // Update proportional spectrum bar
         dom.spectrumBar.innerHTML = '';
         const totalRatio = sorted.reduce((acc, c) => acc + Math.max(0.002, c.ratio), 0);
         sorted.forEach((color) => {
@@ -1187,7 +1201,7 @@
           dom.spectrumBar.appendChild(seg);
         });
 
-        // Cálculo dinâmico de colunas, linhas e escala tipográfica para caber tudo sem scroll
+        // Dynamic calculation of columns, rows and typography scale to fit everything without scroll
         const total = Math.max(1, sorted.length);
         const cols = total <= 4 ? total
           : total <= 12 ? 4
@@ -1197,9 +1211,9 @@
                   : 16;
         const rows = Math.ceil(total / cols);
 
-        const isUltraDense = total > 128; // 129 a 256 cores (até 16x16)
-        const isDense = total > 48 && total <= 128; // 49 a 128 cores
-        const isMedium = total > 16 && total <= 48; // 17 a 48 cores
+        const isUltraDense = total > 128; // 129 to 256 colors (up to 16x16)
+        const isDense = total > 48 && total <= 128; // 49 to 128 colors
+        const isMedium = total > 16 && total <= 48; // 17 to 48 colors
 
         const gapPx = isUltraDense ? 3 : isDense ? 4 : isMedium ? 6 : 8;
         dom.paletteGrid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
@@ -1217,23 +1231,23 @@
           const tile = document.createElement('div');
           tile.style.backgroundColor = hex;
           tile.style.color = contrastText;
-          tile.title = `#${displayIdx + 1} • ${hex} • RGB(${rgbStr}) • Clique para editar`;
+          tile.title = `#${displayIdx + 1} • ${hex} • RGB(${rgbStr}) • Click to edit`;
 
           if (isUltraDense) {
-            // Modo ultra-compacto (129-256 cores): retângulos minimalistas com indicador de edição
+            // Ultra-compact mode (129-256 colors): minimalist rectangles with edit indicator
             tile.className = 'group relative w-full h-full min-h-0 rounded-md border border-white/10 flex items-center justify-center cursor-pointer hover:scale-110 hover:z-10 transition-transform';
             tile.innerHTML = color.edited
-              ? '<span class="w-1.5 h-1.5 rounded-full bg-amber-400 ring-1 ring-black/60" title="Editada manualmente"></span>'
+              ? '<span class="w-1.5 h-1.5 rounded-full bg-amber-400 ring-1 ring-black/60" title="Manually edited"></span>'
               : '';
           } else if (isDense) {
-            // Modo denso (49-128 cores): exibe apenas HEX reduzido
+            // Dense mode (49-128 colors): displays reduced HEX only
             tile.className = 'group relative w-full h-full min-h-0 rounded-lg border border-white/10 p-1 flex flex-col justify-end cursor-pointer hover:scale-105 hover:z-10 transition-transform';
             tile.innerHTML = `
               ${color.edited ? '<span class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-amber-400 ring-1 ring-black/50"></span>' : ''}
               <span class="text-[8px] leading-none font-mono font-semibold truncate">${hex}</span>
             `;
           } else if (isMedium) {
-            // Modo médio (17-48 cores): índice + HEX
+            // Medium mode (17-48 colors): index + HEX
             tile.className = 'group relative w-full h-full min-h-0 rounded-lg border border-white/10 p-1.5 flex flex-col justify-between cursor-pointer hover:scale-[1.03] hover:z-10 transition-transform';
             tile.innerHTML = `
               <div class="flex items-center justify-between leading-none">
@@ -1243,12 +1257,12 @@
               <span class="text-[9px] leading-none font-mono font-semibold truncate">${hex}</span>
             `;
           } else {
-            // Modo confortável (2-16 cores): índice, HEX e RGB
+            // Comfortable mode (2-16 colors): index, HEX and RGB
             tile.className = 'group relative w-full h-full min-h-0 rounded-xl border border-white/10 p-2 flex flex-col justify-between cursor-pointer hover:scale-[1.02] hover:z-10 transition-transform shadow-sm';
             tile.innerHTML = `
               <div class="flex items-center justify-between leading-none">
                 <span class="text-[10px] font-mono opacity-75">#${displayIdx + 1}</span>
-                ${color.edited ? '<span class="w-2 h-2 rounded-full bg-amber-400 ring-2 ring-black/40" title="Editada manualmente"></span>' : ''}
+                ${color.edited ? '<span class="w-2 h-2 rounded-full bg-amber-400 ring-2 ring-black/40" title="Manually edited"></span>' : ''}
               </div>
               <div class="flex flex-col gap-0.5 leading-tight overflow-hidden">
                 <span class="text-xs font-mono font-semibold truncate">${hex}</span>
@@ -1262,7 +1276,7 @@
         });
       }
 
-      // Renderiza imagem original ou quantizada com a paleta atual
+      // Render original or quantized image with current palette
       function renderMainCanvas() {
         const src = state.sourceImageCanvas;
         const dst = dom.previewCanvas;
@@ -1277,7 +1291,7 @@
           return;
         }
 
-        // Modo Preview Quantizado: mapeia cada pixel para a cor mais próxima na paleta atual
+        // Quantized Preview Mode: maps each pixel to nearest color in current palette
         ctx.drawImage(src, 0, 0);
         const imgData = ctx.getImageData(0, 0, dst.width, dst.height);
         const data = imgData.data;
@@ -1311,7 +1325,7 @@
       }
 
       /* =====================================================================
-         8. PROTEÇÃO CONTRA PERDA DE EDIÇÕES MANUAIS (MODAL DE CONFIRMAÇÃO)
+         8. PROTECTION AGAINST LOSS OF MANUAL EDITS (CONFIRMATION MODAL)
          ===================================================================== */
       function requestRegenerationWithProtection(actionCallback, revertCallback) {
         if (!state.hasManualEdits) {
@@ -1319,7 +1333,7 @@
           return;
         }
 
-        // Guarda callbacks e abre modal de aviso
+        // Stores callbacks and opens confirmation modal
         state.pendingAction = {
           confirm: actionCallback,
           revert: revertCallback
@@ -1343,7 +1357,7 @@
         state.pendingAction = null;
       });
 
-      // Listeners de Quantidade de Cores com proteção
+      // Color Count listeners with protection
       function applyColorCountChange(newVal) {
         const clamped = Math.max(2, Math.min(256, Math.round(Number(newVal) || 12)));
         const prevVal = state.colorCount;
@@ -1381,7 +1395,7 @@
         });
       });
 
-      // Listeners de Seed com proteção
+      // Seed listeners with protection
       function applySeedChange(newSeed) {
         const clamped = Math.max(1, Math.min(9999, Math.round(Number(newSeed) || 1)));
         const prevSeed = state.seed;
@@ -1426,7 +1440,7 @@
       });
 
       /* =====================================================================
-         9. EDITOR MANUAL DE COR INDIVIDUAL (HEX, RGB, HSL, ADICIONAR, REMOVER)
+         9. INDIVIDUAL COLOR MANUAL EDITOR (HEX, RGB, HSL, ADD, REMOVE)
          ===================================================================== */
       function openColorEditor(colorId) {
         const idx = state.palette.findIndex((c) => c.id === colorId);
@@ -1500,14 +1514,14 @@
           }
           renderPalette();
           if (state.viewMode === 'quantized') renderMainCanvas();
-          showToast(`Cor atualizada para ${rgbToHex(nr, ng, nb)}`);
+          showToast(`Color updated to ${rgbToHex(nr, ng, nb)}`);
         }
         closeColorEditor();
       });
 
       dom.btnDuplicateColor.addEventListener('click', () => {
         if (state.palette.length >= 256) {
-          showToast('Limite máximo de 256 cores atingido.', 'error');
+          showToast('Maximum limit of 256 colors reached.', 'error');
           return;
         }
         const nr = clampByte(dom.modalRInput.value);
@@ -1524,27 +1538,27 @@
         });
         renderPalette();
         if (state.viewMode === 'quantized') renderMainCanvas();
-        showToast('Cor duplicada na paleta!');
+        showToast('Color duplicated in palette!');
         closeColorEditor();
       });
 
       dom.btnDeleteColor.addEventListener('click', () => {
         if (state.palette.length <= 1) {
-          showToast('A paleta precisa ter pelo menos 1 cor.', 'error');
+          showToast('Palette must have at least 1 color.', 'error');
           return;
         }
         state.palette = state.palette.filter((c) => c.id !== state.editingColorId);
-        // Marca como editado manualmente para proteger a remoção contra acidentes
+        // Mark as manually edited to protect against accidental removal
         if (state.palette.length > 0) state.palette[0].edited = true;
         renderPalette();
         if (state.viewMode === 'quantized') renderMainCanvas();
-        showToast('Cor removida da paleta.');
+        showToast('Color removed from palette.');
         closeColorEditor();
       });
 
       dom.btnAddColor.addEventListener('click', () => {
         if (state.palette.length >= 256) {
-          showToast('Limite máximo de 256 cores atingido.', 'error');
+          showToast('Maximum limit of 256 colors reached.', 'error');
           return;
         }
         const newColor = {
@@ -1565,7 +1579,7 @@
       dom.btnCancelColorEditor.addEventListener('click', closeColorEditor);
 
       /* =====================================================================
-         10. CONTA-GOTAS INTERATIVO NA IMAGEM
+         10. INTERACTIVE EYEDROPPER ON IMAGE
          ===================================================================== */
       function toggleEyedropper(forceState, targetColorId = null) {
         state.eyedropperActive = typeof forceState === 'boolean' ? forceState : !state.eyedropperActive;
@@ -1576,8 +1590,8 @@
           dom.previewCanvas.classList.add('cursor-crosshair');
           dom.eyedropperBanner.classList.remove('hidden');
           dom.eyedropperBannerText.textContent = targetColorId
-            ? 'Clique na imagem para substituir a cor selecionada'
-            : 'Clique na imagem para adicionar/copiar uma cor';
+            ? 'Click on image to replace selected color'
+            : 'Click on image to add/copy a color';
         } else {
           dom.btnEyedropper.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-400');
           dom.previewCanvas.classList.remove('cursor-crosshair');
@@ -1642,7 +1656,7 @@
             target.edited = true;
             renderPalette();
             if (state.viewMode === 'quantized') renderMainCanvas();
-            showToast(`Cor substituída por ${hex}`);
+            showToast(`Color replaced with ${hex}`);
           }
           toggleEyedropper(false);
         } else {
@@ -1658,15 +1672,15 @@
             });
             renderPalette();
             if (state.viewMode === 'quantized') renderMainCanvas();
-            copyTextToClipboard(hex, `Cor ${hex} adicionada à paleta e copiada!`);
+            copyTextToClipboard(hex, `Color ${hex} added to palette and copied!`);
           } else {
-            copyTextToClipboard(hex, `HEX ${hex} copiado!`);
+            copyTextToClipboard(hex, `HEX ${hex} copied!`);
           }
         }
       });
 
       /* =====================================================================
-         11. EXPORTAÇÃO (PNG EM GRADE, JSON HEX, JSON RGB E CSS)
+         11. EXPORT (GRID PNG, JSON HEX, JSON RGB AND CSS)
          ===================================================================== */
       function downloadBlob(blob, filename) {
         const url = URL.createObjectURL(blob);
@@ -1679,7 +1693,7 @@
         setTimeout(() => URL.revokeObjectURL(url), 1000);
       }
 
-      // Exportações JSON & CSS
+      // JSON & CSS exports
       dom.btnToggleExportMenu.addEventListener('click', (e) => {
         e.stopPropagation();
         dom.exportDropdownMenu.classList.toggle('hidden');
@@ -1695,52 +1709,52 @@
         const sorted = getSortedPalette();
         const hexArray = sorted.map((c) => rgbToHex(c.r, c.g, c.b));
         const blob = new Blob([JSON.stringify(hexArray, null, 2)], { type: 'application/json' });
-        downloadBlob(blob, `paleta-hex-${sorted.length}-cores.json`);
+        downloadBlob(blob, `palette-hex-${sorted.length}-colors.json`);
         dom.exportDropdownMenu.classList.add('hidden');
-        showToast('Arquivo JSON HEX baixado!');
+        showToast('HEX JSON file downloaded!');
       });
 
       dom.btnDownloadJsonRgbObj.addEventListener('click', () => {
         const sorted = getSortedPalette();
         const rgbArray = sorted.map((c) => ({ r: c.r, g: c.g, b: c.b }));
         const blob = new Blob([JSON.stringify(rgbArray, null, 2)], { type: 'application/json' });
-        downloadBlob(blob, `paleta-rgb-${sorted.length}-cores.json`);
+        downloadBlob(blob, `palette-rgb-${sorted.length}-colors.json`);
         dom.exportDropdownMenu.classList.add('hidden');
-        showToast('Arquivo JSON RGB ({r, g, b}) baixado!');
+        showToast('RGB JSON ({r, g, b}) file downloaded!');
       });
 
       dom.btnDownloadJsonRgbArr.addEventListener('click', () => {
         const sorted = getSortedPalette();
         const rgbMatrix = sorted.map((c) => [c.r, c.g, c.b]);
         const blob = new Blob([JSON.stringify(rgbMatrix, null, 2)], { type: 'application/json' });
-        downloadBlob(blob, `paleta-rgb-array-${sorted.length}-cores.json`);
+        downloadBlob(blob, `palette-rgb-array-${sorted.length}-colors.json`);
         dom.exportDropdownMenu.classList.add('hidden');
-        showToast('Arquivo JSON RGB Array baixado!');
+        showToast('RGB Array JSON file downloaded!');
       });
 
       dom.btnCopyCssVars.addEventListener('click', () => {
         const sorted = getSortedPalette();
         const lines = sorted.map((c, idx) => `  --color-${idx + 1}: ${rgbToHex(c.r, c.g, c.b)};`);
         const css = `:root {\n${lines.join('\n')}\n}`;
-        copyTextToClipboard(css, 'Variáveis CSS (:root) copiadas!');
+        copyTextToClipboard(css, 'CSS Variables (:root) copied!');
         dom.exportDropdownMenu.classList.add('hidden');
       });
 
       dom.btnCopyHexArray.addEventListener('click', () => {
         const sorted = getSortedPalette();
         const json = JSON.stringify(sorted.map((c) => rgbToHex(c.r, c.g, c.b)));
-        copyTextToClipboard(json, 'Array JSON HEX copiado!');
+        copyTextToClipboard(json, 'HEX JSON Array copied!');
         dom.exportDropdownMenu.classList.add('hidden');
       });
 
       dom.btnCopyRgbArray.addEventListener('click', () => {
         const sorted = getSortedPalette();
         const json = JSON.stringify(sorted.map((c) => ({ r: c.r, g: c.g, b: c.b })));
-        copyTextToClipboard(json, 'Array JSON RGB copiado!');
+        copyTextToClipboard(json, 'RGB JSON Array copied!');
         dom.exportDropdownMenu.classList.add('hidden');
       });
 
-      // Renderização da Grade PNG para Exportação
+      // PNG Grid Rendering for Export
       function renderExportPngCanvas() {
         const sorted = getSortedPalette();
         const count = sorted.length;
@@ -1749,7 +1763,7 @@
         const gap = Math.max(0, Math.min(40, parseInt(dom.pngGapInput.value, 10) || 0));
         const labelMode = dom.pngLabelModeSelect.value;
 
-        // Cada célula é sempre um quadrado perfeito (cellSize × cellSize)
+        // Each cell is always a perfect square (cellSize × cellSize)
         const cellSize = count > 64 ? 96 : 136;
         const padding = 0;
 
@@ -1761,7 +1775,7 @@
         canvas.height = height;
         const ctx = canvas.getContext('2d');
 
-        // Fundo escuro elegante
+        // Elegant dark background
         ctx.fillStyle = '#09090b';
         ctx.fillRect(0, 0, width, height);
 
@@ -1773,7 +1787,7 @@
           const hex = rgbToHex(color.r, color.g, color.b);
           const textColor = getContrastTextColor(color.r, color.g, color.b);
 
-          // Desenha bloco quadrado
+          // Draw square block
           const radius = gap > 0 ? 12 : 0;
           ctx.fillStyle = hex;
           ctx.beginPath();
@@ -1797,7 +1811,7 @@
       }
 
       dom.btnOpenExportPng.addEventListener('click', () => {
-        // Sugere quantidade ideal de colunas baseada no número atual de cores
+        // Suggests optimal column count based on current color count
         const count = state.palette.length;
         dom.pngColumnsInput.value = count <= 6 ? count : count <= 16 ? 4 : count <= 64 ? 8 : 16;
         renderExportPngCanvas();
@@ -1812,8 +1826,8 @@
       dom.btnDownloadPngNow.addEventListener('click', () => {
         dom.exportPngPreviewCanvas.toBlob((blob) => {
           if (blob) {
-            downloadBlob(blob, `paleta-cores-${state.palette.length}.png`);
-            showToast('Imagem PNG da paleta exportada!');
+            downloadBlob(blob, `color-palette-${state.palette.length}.png`);
+            showToast('Palette PNG image exported!');
           }
         }, 'image/png');
       });
@@ -1822,7 +1836,7 @@
       dom.btnCancelExportPng.addEventListener('click', () => dom.exportPngModal.classList.add('hidden'));
 
       /* =====================================================================
-         12. OUTROS CONTROLES DE UI, DRAG & DROP, PASTE E ATALHOS
+         12. OTHER UI CONTROLS, DRAG & DROP, PASTE AND SHORTCUTS
          ===================================================================== */
       dom.sortSelect.addEventListener('change', (e) => {
         state.sortBy = e.target.value;
@@ -1843,7 +1857,7 @@
         renderMainCanvas();
       });
 
-      // Upload via Input
+      // File input upload
       dom.fileInput.addEventListener('change', (e) => {
         if (e.target.files && e.target.files[0]) {
           handleImageFile(e.target.files[0]);
@@ -1851,7 +1865,7 @@
         }
       });
 
-      // Drag & Drop global/dropzone
+      // Global/dropzone Drag & Drop
       ['dragenter', 'dragover'].forEach((evt) => {
         dom.dropZone.addEventListener(evt, (e) => {
           e.preventDefault();
@@ -1873,7 +1887,7 @@
         if (files && files[0]) handleImageFile(files[0]);
       });
 
-      // Colar imagem da área de transferência (Ctrl+V)
+      // Paste image from clipboard (Ctrl+V)
       window.addEventListener('paste', (e) => {
         const items = e.clipboardData && e.clipboardData.items;
         if (!items) return;
@@ -1888,7 +1902,7 @@
         }
       });
 
-      // Tecla ESC fecha modais ou desativa conta-gotas
+      // ESC key closes modals or deactivates eyedropper
       window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           if (state.eyedropperActive) toggleEyedropper(false);
@@ -1901,7 +1915,7 @@
       });
 
       /* =====================================================================
-         13. INICIALIZAÇÃO
+         13. INITIALIZATION
          ===================================================================== */
       window.addEventListener('DOMContentLoaded', () => {
         loadDefaultInitialImage();
