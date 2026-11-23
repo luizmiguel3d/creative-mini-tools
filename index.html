@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Mini Tools</title>
+    <!-- Carregamento do Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonte Inter para leitura confortável -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Configuração de Cores "Meio Termo" (Confortável para os olhos) -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        // Tema Claro Suave (cinza-pedra médio-claro, sem branco puro)
+                        lightBg: '#e2e5ea',
+                        lightCard: '#eef0f3',
+                        lightCardHover: '#f5f7f9',
+                        lightBorder: '#cfd5de',
+                        lightText: '#1e293b',
+                        lightMuted: '#526075',
+
+                        // Tema Escuro Suave (grafite médio-escuro, sem preto absoluto)
+                        darkBg: '#22252a',
+                        darkCard: '#2b2f36',
+                        darkCardHover: '#323740',
+                        darkBorder: '#383d47',
+                        darkText: '#e2e8f0',
+                        darkMuted: '#9aa5b5',
+
+                        // Cor de destaque suave
+                        accent: '#38bdf8',
+                        accentLight: '#0284c7',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-lightBg text-lightText dark:bg-darkBg dark:text-darkText min-h-screen flex flex-col font-sans antialiased transition-colors duration-200 selection:bg-accent/20">
+
+    <!-- ===================================================================== -->
+    <!-- CABEÇALHO COM TÍTULO GRANDE CENTRALIZADO E BOTÃO DE TEMA NO CANTO     -->
+    <!-- ===================================================================== -->
+    <header class="relative max-w-5xl w-full mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-16 sm:pb-12">
+
+        <!-- Botão Discreto de Alternância de Tema (Canto Superior Direito) -->
+        <div class="absolute top-5 right-4 sm:top-6 sm:right-6">
+            <button id="btn-theme-toggle" type="button" aria-label="Alternar tema" title="Alternar tema claro/escuro"
+                class="p-2.5 rounded-xl border border-lightBorder dark:border-darkBorder bg-lightCard dark:bg-darkCard hover:bg-lightCardHover dark:hover:bg-darkCardHover text-lightMuted dark:text-darkMuted hover:text-lightText dark:hover:text-darkText transition-colors shadow-2xs">
+                <!-- Ícone Sol (visível no tema escuro) -->
+                <svg class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <!-- Ícone Lua (visível no tema claro) -->
+                <svg class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Título Principal Centralizado -->
+        <div class="text-center max-w-xl mx-auto">
+            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-lightText dark:text-darkText">
+                Creative Mini Tools
+            </h1>
+            <p class="mt-3 text-sm sm:text-base text-lightMuted dark:text-darkMuted">
+                This is a set of mini tools I sometimes make using AI to assist on creative process.
+            </p>
+            <p class="mt-3 text-sm sm:text-base text-lightMuted dark:text-darkMuted">
+                They are intended to solve small and specific tasks quickly, so we can focus on the creative process
+                itselft.
+            </p>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- GRID DE FERRAMENTAS                                                   -->
+    <!-- ===================================================================== -->
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 pb-16">
+        <section id="tools-grid" aria-label="Ferramentas disponíveis"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Os cards serão renderizados automaticamente aqui a partir do array TOOLS -->
+        </section>
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- RODAPÉ MINIMALISTA                                                    -->
+    <!-- ===================================================================== -->
+    <footer class="py-6 text-center text-xs text-lightMuted dark:text-darkMuted">
+        <p>Creative Mini Tools</p>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- CONFIGURAÇÃO FÁCIL DAS FERRAMENTAS & LÓGICA                           -->
+    <!-- ===================================================================== -->
+    <script>
+        /**
+         * ====================================================================
+         * LISTA DE FERRAMENTAS (EDITE AQUI PARA ADICIONAR NOVAS)
+         * ====================================================================
+         * Basta adicionar um novo objeto seguindo o modelo abaixo:
+         * {
+         *     name: "Nome da Ferramenta",
+         *     description: "Descrição breve do que ela faz.",
+         *     link: "https://seu-link.com ou ./pasta/index.html",
+         *     icon: "🎨" // Pode ser qualquer emoji OU um código <svg>...</svg> inline
+         * }
+         */
+        const TOOLS = [
+            {
+                name: "Chromaforge",
+                description: "Create color palettes from images and export as JSON or image.",
+                link: "chromaforge.html",
+                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>`
+            }
+        ];
+
+        // ====================================================================
+        // GERENCIAMENTO DE TEMA (COM PERSISTÊNCIA NO LOCALSTORAGE)
+        // ====================================================================
+        const THEME_STORAGE_KEY = 'web_tools_hub_theme';
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+            const htmlEl = document.documentElement;
+
+            if (savedTheme === 'light') {
+                htmlEl.classList.remove('dark');
+            } else {
+                htmlEl.classList.add('dark');
+            }
+        }
+
+        function toggleTheme() {
+            const htmlEl = document.documentElement;
+            const isDark = htmlEl.classList.toggle('dark');
+            localStorage.setItem(THEME_STORAGE_KEY, isDark ? 'dark' : 'light');
+        }
+
+        // ====================================================================
+        // RENDERIZAÇÃO DOS CARDS
+        // ====================================================================
+        function escapeHTML(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function renderTools() {
+            const grid = document.getElementById('tools-grid');
+
+            grid.innerHTML = TOOLS.map(tool => {
+                // Verifica se o ícone começa com '<svg' para renderizar como HTML, caso contrário trata como emoji/texto
+                const isSvg = typeof tool.icon === 'string' && tool.icon.trim().startsWith('<svg');
+                const iconContent = isSvg
+                    ? tool.icon
+                    : `<span class="text-2xl leading-none select-none">${escapeHTML(tool.icon || '🛠️')}</span>`;
+
+                return `
+                    <a href="${escapeHTML(tool.link)}" target="_blank" rel="noopener noreferrer"
+                        class="group flex flex-col p-6 rounded-2xl bg-lightCard dark:bg-darkCard border border-lightBorder dark:border-darkBorder hover:bg-lightCardHover dark:hover:bg-darkCardHover hover:border-accentLight/50 dark:hover:border-accent/50 hover:-translate-y-0.5 transition-all duration-200 shadow-2xs focus:outline-none focus:ring-2 focus:ring-accentLight dark:focus:ring-accent">
+                        
+                        <!-- Ícone da Ferramenta -->
+                        <div class="w-12 h-12 rounded-xl bg-lightBg dark:bg-darkBg border border-lightBorder dark:border-darkBorder flex items-center justify-center text-accentLight dark:text-accent mb-4 group-hover:scale-105 transition-transform">
+                            ${iconContent}
+                        </div>
+
+                        <!-- Nome (Link destacado) -->
+                        <h2 class="text-lg font-semibold text-lightText dark:text-darkText group-hover:text-accentLight dark:group-hover:text-accent transition-colors">
+                            ${escapeHTML(tool.name)}
+                        </h2>
+
+                        <!-- Descrição Breve -->
+                        <p class="mt-2 text-sm text-lightMuted dark:text-darkMuted leading-relaxed">
+                            ${escapeHTML(tool.description)}
+                        </p>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        // ====================================================================
+        // INICIALIZAÇÃO
+        // ====================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            renderTools();
+            document.getElementById('btn-theme-toggle').addEventListener('click', toggleTheme);
+        });
+    </script>
+</body>
+
+</html>
