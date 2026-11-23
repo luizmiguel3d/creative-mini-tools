@@ -81,7 +81,7 @@
                 Creative Mini Tools
             </h1>
             <p class="mt-3 text-sm sm:text-base text-lightMuted dark:text-darkMuted">
-                This is a set of mini tools I made to assist on creative process using AI, all of them works locally.
+                This is a set of mini tools I made to assist on creative process using AI, they all work locally.
                 They are intended to solve small and specific tasks quickly, so we can focus on the creative process
                 itselft.
             </p>
@@ -118,7 +118,7 @@
          *     name: "Nome da Ferramenta",
          *     description: "Descrição breve do que ela faz.",
          *     link: "https://seu-link.com ou ./pasta/index.html",
-         *     icon: "🎨" // Pode ser qualquer emoji OU um código <svg>...</svg> inline
+         *     icon: "icons/chromaforge_64.png" // Pode ser caminho de imagem ("icons/..."), emoji OU código HTML (<svg> ou <img>)
          * }
          */
         const TOOLS = [
@@ -126,7 +126,7 @@
                 name: "Chromaforge",
                 description: "Create color palettes from images and export as JSON or image.",
                 link: "chromaforge.html",
-                icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>`
+                icon: "icons/chromaforge_64.png"
             }
         ];
 
@@ -168,11 +168,19 @@
             const grid = document.getElementById('tools-grid');
 
             grid.innerHTML = TOOLS.map(tool => {
-                // Verifica se o ícone começa com '<svg' para renderizar como HTML, caso contrário trata como emoji/texto
-                const isSvg = typeof tool.icon === 'string' && tool.icon.trim().startsWith('<svg');
-                const iconContent = isSvg
-                    ? tool.icon
-                    : `<span class="text-2xl leading-none select-none">${escapeHTML(tool.icon || '🛠️')}</span>`;
+                // Suporta SVG inline, tag IMG inline, caminho de arquivo de imagem ou emoji/texto
+                const trimmedIcon = typeof tool.icon === 'string' ? tool.icon.trim() : '';
+                const isHtml = trimmedIcon.startsWith('<svg') || trimmedIcon.startsWith('<img');
+                const isImagePath = /\.(png|jpe?g|svg|webp|gif|ico)$/i.test(trimmedIcon);
+
+                let iconContent;
+                if (isHtml) {
+                    iconContent = trimmedIcon;
+                } else if (isImagePath) {
+                    iconContent = `<img src="${escapeHTML(trimmedIcon)}" alt="${escapeHTML(tool.name)}" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-contain shadow-xs">`;
+                } else {
+                    iconContent = `<span class="text-2xl leading-none select-none">${escapeHTML(tool.icon || '🛠️')}</span>`;
+                }
 
                 return `
                     <a href="${escapeHTML(tool.link)}" target="_blank" rel="noopener noreferrer"
